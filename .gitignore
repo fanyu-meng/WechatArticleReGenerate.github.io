@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Python
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+*.tmp
+*.log
+*.bak
+
+# 原始资源文件（不需要提交到仓库）
+resources/*.jpg
+resources/*.png
+resources/*.mp4
+resources/*.pdf
+resources/*.html
+resources/references/
+
+# 处理脚本的临时输出
+images/
+
+# 但保留 docs/ 目录下的所有文件（这些是需要部署的）
