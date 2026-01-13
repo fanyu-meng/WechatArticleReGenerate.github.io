@@ -1,169 +1,329 @@
-import React from 'react';
-import { 
-  Waves, Building2, Anchor, Activity, Bird, Brain, Music, 
-  VolumeX, Mic2, Cpu, Wind, ShieldAlert 
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声学知识全景图</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-slate-100 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <header class="text-center mb-16 relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-400 opacity-10 rounded-full blur-3xl -z-10"></div>
+                <h1 class="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+                    声学知识全景图
+                </h1>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+                    从物理本源到艺术表现，声学作为物理学中最具交叉性的学科，正在全方位塑造现代科技与生活。
+                </p>
+                <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                    <span class="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        机械波研究
+                    </span>
+                    <span class="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                        信号处理
+                    </span>
+                    <span class="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        医学与工业
+                    </span>
+                </div>
+            </header>
 
-const BranchCard = ({ title, icon: Icon, description, applications, color }) => (
-  <div className={`flex flex-col p-6 rounded-2xl border-l-4 ${color} bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8`}>
-    <div className="flex items-center gap-4 mb-4">
-      <div className={`p-3 rounded-xl ${color.replace('border-', 'bg-').replace('-500', '-100')}`}>
-        <Icon className={`w-8 h-8 ${color.replace('border-', 'text-')}`} />
-      </div>
-      <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
-    </div>
-    <p className="text-gray-600 mb-4 leading-relaxed">
-      {description}
-    </p>
-    <div className="bg-gray-50 p-4 rounded-lg">
-      <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
-      <div className="flex flex-wrap gap-2">
-        {applications.map((app, idx) => (
-          <span key={idx} className="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">
-            {app}
-          </span>
-        ))}
-      </div>
-    </div>
-  </div>
-);
+            <!-- Branches Grid -->
+            <div class="space-y-2">
+                <!-- 物理声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-blue-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-blue-100">
+                            <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">物理声学 (Physical Acoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究声波在各种媒质（固体、液体、气体）中的传播基本规律。探讨声波与物质的相互作用，是所有声学分支的理论基石。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">波动方程研究</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">非线性声学</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">声子晶体</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">热声效应</span>
+                        </div>
+                    </div>
+                </div>
 
-const App = () => {
-  const branches = [
-    {
-      title: "物理声学 (Physical Acoustics)",
-      icon: Waves,
-      color: "border-blue-500",
-      description: "研究声波在各种媒质（固体、液体、气体）中的传播基本规律。探讨声波与物质的相互作用，是所有声学分支的理论基石。",
-      applications: ["波动方程研究", "非线性声学", "声子晶体", "热声效应"]
-    },
-    {
-      title: "建筑声学 (Architectural Acoustics)",
-      icon: Building2,
-      color: "border-amber-500",
-      description: "研究室内声环境的设计。目标是使房间（如音乐厅、教室）获得最佳听音效果，并解决房间间的隔声问题。",
-      applications: ["混响时间控制", "剧院设计", "室内吸声材料", "噪声屏障"]
-    },
-    {
-      title: "水声学 (Underwater Acoustics)",
-      icon: Anchor,
-      color: "border-cyan-600",
-      description: "研究声波在水下的传播规律。由于电磁波在水中衰减极快，声波成为海洋中唯一的远距离通信和探测手段。",
-      applications: ["声呐技术", "水下通信", "海洋资源勘探", "潜艇隐身"]
-    },
-    {
-      title: "超声学 (Ultrasonics)",
-      icon: Activity,
-      color: "border-emerald-500",
-      description: "研究频率高于 20,000Hz 的机械波。其波长短，方向性好，具有强大的穿透力，在工业和医学领域应用广泛。",
-      applications: ["B超影像", "超声清洗", "无损检测", "超声焊接"]
-    },
-    {
-      title: "心理声学 (Psychoacoustics)",
-      icon: Brain,
-      color: "border-purple-500",
-      description: "研究人对声音的心理和生理反应。它探讨了物理声波与人类主观听觉感受（响度、音高、音色）之间的复杂关系。",
-      applications: ["MP3压缩算法", "助听器研发", "环绕声系统", "音质评价"]
-    },
-    {
-      title: "生物声学 (Bioacoustics)",
-      icon: Bird,
-      color: "border-orange-500",
-      description: "研究动物声音的产生、探测和意义。包括动物间的通信、定位（如蝙蝠和鲸鱼）以及噪声对野生动物的影响。",
-      applications: ["动物种群监测", "仿生声呐", "生态保护", "鸟类防撞"]
-    },
-    {
-      title: "音乐声学 (Musical Acoustics)",
-      icon: Music,
-      color: "border-pink-500",
-      description: "研究乐器发声的物理原理以及音乐感知的神经科学。连接了物理学与艺术的学科。",
-      applications: ["乐器设计优化", "电子乐器合成", "音乐认知", "嗓音分析"]
-    },
-    {
-      title: "噪声控制 (Noise Control)",
-      icon: VolumeX,
-      color: "border-red-500",
-      description: "研究噪声产生的原因、传播途径及降低噪声的技术。关注环境健康和工业生产的舒适度。",
-      applications: ["城市规划", "航空发动机消声", "机械减振", "主动噪声控制"]
-    },
-    {
-      title: "电声学 (Electroacoustics)",
-      icon: Cpu,
-      color: "border-indigo-500",
-      description: "研究声电相互转换的技术。主要涉及换能器（扬声器、传声器）的设计、音频信号处理及录放音技术。",
-      applications: ["智能音箱", "手机麦克风", "耳机设计", "公共广播系统"]
-    },
-    {
-      title: "语言通信 (Speech Communication)",
-      icon: Mic2,
-      color: "border-sky-500",
-      description: "研究语音的产生、传输、接收和识别。是现代人工智能和通信技术的核心领域之一。",
-      applications: ["自动语音识别", "语音合成", "机器翻译", "声纹鉴定"]
-    },
-    {
-      title: "气动声学 (Aeroacoustics)",
-      icon: Wind,
-      color: "border-slate-500",
-      description: "研究高速流体流动产生的噪声及其传播。对于现代航空、航天及高速交通工具至关重要。",
-      applications: ["高铁风噪降低", "喷气发动机降噪", "风力发电机", "吹奏乐器原理"]
-    },
-    {
-      title: "结构声学 (Structural Acoustics)",
-      icon: ShieldAlert,
-      color: "border-rose-600",
-      description: "研究振动结构与周围流体介质之间的相互作用及其辐射声能。主要针对机械结构的强度与声音辐射。",
-      applications: ["汽车NVH工程", "舰船振动控制", "航天器结构完整性", "工业机械监测"]
-    }
-  ];
+                <!-- 建筑声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-amber-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-amber-100">
+                            <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">建筑声学 (Architectural Acoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究室内声环境的设计。目标是使房间（如音乐厅、教室）获得最佳听音效果，并解决房间间的隔声问题。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">混响时间控制</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">剧院设计</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">室内吸声材料</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">噪声屏障</span>
+                        </div>
+                    </div>
+                </div>
 
-  return (
-    <div className="min-h-screen bg-slate-100 py-12 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
-        <header className="text-center mb-16 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-400 opacity-10 rounded-full blur-3xl -z-10"></div>
-          <h1 className="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            声学知识全景图
-          </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            从物理本源到艺术表现，声学作为物理学中最具交叉性的学科，正在全方位塑造现代科技与生活。
-          </p>
-          <div className="mt-8 flex justify-center gap-4">
-            <span className="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">
-              <Waves className="w-4 h-4" /> 机械波研究
-            </span>
-            <span className="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">
-              <Cpu className="w-4 h-4" /> 信号处理
-            </span>
-            <span className="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">
-              <Activity className="w-4 h-4" /> 医学与工业
-            </span>
-          </div>
-        </header>
+                <!-- 水声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-cyan-600 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-cyan-100">
+                            <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">水声学 (Underwater Acoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究声波在水下的传播规律。由于电磁波在水中衰减极快，声波成为海洋中唯一的远距离通信和探测手段。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">声呐技术</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">水下通信</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">海洋资源勘探</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">潜艇隐身</span>
+                        </div>
+                    </div>
+                </div>
 
-        {/* Info Grid */}
-        <div className="space-y-2">
-          {branches.map((branch, index) => (
-            <BranchCard key={index} {...branch} />
-          ))}
+                <!-- 超声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-emerald-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-emerald-100">
+                            <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">超声学 (Ultrasonics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究频率高于 20,000Hz 的机械波。其波长短，方向性好，具有强大的穿透力，在工业和医学领域应用广泛。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">B超影像</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">超声清洗</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">无损检测</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">超声焊接</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 心理声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-purple-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-purple-100">
+                            <svg class="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">心理声学 (Psychoacoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究人对声音的心理和生理反应。它探讨了物理声波与人类主观听觉感受（响度、音高、音色）之间的复杂关系。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">MP3压缩算法</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">助听器研发</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">环绕声系统</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">音质评价</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 生物声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-orange-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-orange-100">
+                            <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">生物声学 (Bioacoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究动物声音的产生、探测和意义。包括动物间的通信、定位（如蝙蝠和鲸鱼）以及噪声对野生动物的影响。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">动物种群监测</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">仿生声呐</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">生态保护</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">鸟类防撞</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 音乐声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-pink-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-pink-100">
+                            <svg class="w-8 h-8 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">音乐声学 (Musical Acoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究乐器发声的物理原理以及音乐感知的神经科学。连接了物理学与艺术的学科。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">乐器设计优化</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">电子乐器合成</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">音乐认知</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">嗓音分析</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 噪声控制 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-red-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-red-100">
+                            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">噪声控制 (Noise Control)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究噪声产生的原因、传播途径及降低噪声的技术。关注环境健康和工业生产的舒适度。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">城市规划</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">航空发动机消声</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">机械减振</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">主动噪声控制</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-indigo-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-indigo-100">
+                            <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">电声学 (Electroacoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究声电相互转换的技术。主要涉及换能器（扬声器、传声器）的设计、音频信号处理及录放音技术。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">智能音箱</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">手机麦克风</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">耳机设计</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">公共广播系统</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 语言通信 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-sky-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-sky-100">
+                            <svg class="w-8 h-8 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">语言通信 (Speech Communication)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究语音的产生、传输、接收和识别。是现代人工智能和通信技术的核心领域之一。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">自动语音识别</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">语音合成</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">机器翻译</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">声纹鉴定</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 气动声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-slate-500 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-slate-100">
+                            <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">气动声学 (Aeroacoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究高速流体流动产生的噪声及其传播。对于现代航空、航天及高速交通工具至关重要。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">高铁风噪降低</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">喷气发动机降噪</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">风力发电机</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">吹奏乐器原理</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 结构声学 -->
+                <div class="flex flex-col p-6 rounded-2xl border-l-4 border-rose-600 bg-white shadow-lg hover:shadow-xl transition-all duration-300 mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 rounded-xl bg-rose-100">
+                            <svg class="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">结构声学 (Structural Acoustics)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        研究振动结构与周围流体介质之间的相互作用及其辐射声能。主要针对机械结构的强度与声音辐射。
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">典型应用领域</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">汽车NVH工程</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">舰船振动控制</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">航天器结构完整性</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 shadow-sm">工业机械监测</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <footer class="mt-16 text-center border-t border-gray-200 pt-12 pb-8">
+                <div class="flex justify-center items-center gap-3 text-slate-400 mb-4">
+                    <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                    <div class="h-px w-20 bg-slate-300"></div>
+                    <span class="text-sm font-medium tracking-widest uppercase">Acoustics Branches Map</span>
+                    <div class="h-px w-20 bg-slate-300"></div>
+                    <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                </div>
+                <p class="text-slate-500 text-sm">
+                    © 2026 声学科学研究全景图 · 涵盖 12 大核心科研分支
+                </p>
+            </footer>
         </div>
-
-        {/* Footer Section */}
-        <footer className="mt-16 text-center border-t border-gray-200 pt-12 pb-8">
-          <div className="flex justify-center items-center gap-3 text-slate-400 mb-4">
-            <Waves className="w-6 h-6 animate-pulse" />
-            <div className="h-px w-20 bg-slate-300"></div>
-            <span className="text-sm font-medium tracking-widest uppercase">Acoustics Branches Map</span>
-            <div className="h-px w-20 bg-slate-300"></div>
-            <Waves className="w-6 h-6 animate-pulse" />
-          </div>
-          <p className="text-slate-500 text-sm">
-            © 2026 声学科学研究全景图 · 涵盖 12 大核心科研分支
-          </p>
-        </footer>
-      </div>
     </div>
-  );
-};
-
-export default App;
+</body>
+</html>
