@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弦振动交互演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .value-display {
+            min-width: 60px;
+            padding: 5px 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .info-panel {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin-top: 20px;
+        }
+        
+        .info-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .info-panel p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .preset-btn {
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .preset-btn:hover {
+            background: #2980b9;
+        }
+        
+        .back-link {
+            margin-bottom: 20px;
+        }
+        
+        .back-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="what-is-acoustics.html">← 返回文章</a>
+        </div>
+        
+        <h1>🎵 弦振动交互演示</h1>
+        <p class="subtitle">通过调整频率和振幅，观察弦振动的变化</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>频率 (Hz): <span id="freq-label">440</span></label>
+                <div class="input-wrapper">
+                    <input type="range" id="frequency" min="100" max="1000" value="440" step="10">
+                    <span class="value-display" id="freq-value">440 Hz</span>
+                </div>
+                <small style="color: #7f8c8d; margin-top: 5px;">频率越高，振动越快</small>
+            </div>
+            
+            <div class="control-group">
+                <label>振幅 (强度): <span id="amp-label">50</span>%</label>
+                <div class="input-wrapper">
+                    <input type="range" id="amplitude" min="10" max="100" value="50" step="5">
+                    <span class="value-display" id="amp-value">50%</span>
+                </div>
+                <small style="color: #7f8c8d; margin-top: 5px;">振幅越大，振动幅度越大</small>
+            </div>
+        </div>
+        
+        <div class="preset-buttons">
+            <button class="preset-btn" onclick="setPreset(261.63, 50)">C4 (中央C)</button>
+            <button class="preset-btn" onclick="setPreset(329.63, 50)">E4</button>
+            <button class="preset-btn" onclick="setPreset(440, 50)">A4 (标准音)</button>
+            <button class="preset-btn" onclick="setPreset(523.25, 50)">C5</button>
+            <button class="preset-btn" onclick="setPreset(880, 50)">A5 (高八度)</button>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="vibrationCanvas"></canvas>
+        </div>
+        
+        <div class="info-panel">
+            <h3>📚 什么是振动和频率？</h3>
+            <p><strong>振动</strong>：物体围绕平衡位置做周期性往复运动。就像你看到的弦，它在平衡位置（水平线）上下摆动。</p>
+            <p><strong>频率</strong>：单位时间内完成振动的次数，单位是赫兹（Hz）。频率越高，振动越快，声音越高。</p>
+            <p><strong>振幅</strong>：振动的最大位移。振幅越大，振动的幅度越大，声音越响。</p>
+            <p><strong>弦振动</strong>：当弦被拨动时，会产生驻波（standing wave），形成特定的振动模式。不同的频率对应不同的音高。</p>
+        </div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('vibrationCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置canvas尺寸
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // 控制参数
+        let frequency = 440; // Hz
+        let amplitude = 50; // 百分比
+        let time = 0;
+        
+        // 获取控制元素
+        const freqSlider = document.getElementById('frequency');
+        const ampSlider = document.getElementById('amplitude');
+        const freqValue = document.getElementById('freq-value');
+        const freqLabel = document.getElementById('freq-label');
+        const ampValue = document.getElementById('amp-value');
+        const ampLabel = document.getElementById('amp-label');
+        
+        // 更新频率
+        freqSlider.addEventListener('input', (e) => {
+            frequency = parseFloat(e.target.value);
+            freqValue.textContent = frequency + ' Hz';
+            freqLabel.textContent = frequency;
+        });
+        
+        // 更新振幅
+        ampSlider.addEventListener('input', (e) => {
+            amplitude = parseFloat(e.target.value);
+            ampValue.textContent = amplitude + '%';
+            ampLabel.textContent = amplitude;
+        });
+        
+        // 预设按钮
+        function setPreset(freq, amp) {
+            frequency = freq;
+            amplitude = amp;
+            freqSlider.value = freq;
+            ampSlider.value = amp;
+            freqValue.textContent = freq + ' Hz';
+            freqLabel.textContent = freq;
+            ampValue.textContent = amp + '%';
+            ampLabel.textContent = amp;
+        }
+        
+        // 绘制函数
+        function draw() {
+            // 清空画布
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerY = canvas.height / 2;
+            const stringLength = canvas.width - 100;
+            const startX = 50;
+            const endX = startX + stringLength;
+            
+            // 计算实际振幅（像素）
+            const actualAmplitude = (amplitude / 100) * 80;
+            
+            // 绘制平衡位置参考线
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(startX, centerY);
+            ctx.lineTo(endX, centerY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // 绘制弦的振动
+            ctx.strokeStyle = '#3498db';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            const points = 200;
+            for (let i = 0; i <= points; i++) {
+                const x = startX + (i / points) * stringLength;
+                const position = i / points; // 0 到 1
+                
+                // 计算驻波模式（两端固定）
+                const wave = Math.sin(Math.PI * position) * Math.sin(2 * Math.PI * frequency * time / 1000);
+                const y = centerY + wave * actualAmplitude;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.stroke();
+            
+            // 绘制固定点
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(startX, centerY, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(endX, centerY, 6, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 绘制振幅指示器
+            ctx.strokeStyle = '#95a5a6';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(endX + 20, centerY - actualAmplitude);
+            ctx.lineTo(endX + 20, centerY + actualAmplitude);
+            ctx.stroke();
+            
+            // 绘制频率指示（波形密度）
+            ctx.fillStyle = 'rgba(52, 152, 219, 0.3)';
+            const waveCount = Math.floor(frequency / 100);
+            for (let i = 0; i < waveCount && i < 10; i++) {
+                const x = startX + (i / 10) * stringLength;
+                ctx.beginPath();
+                ctx.arc(x, centerY, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // 更新时间
+            time += 16; // 约60fps
+            
+            requestAnimationFrame(draw);
+        }
+        
+        // 开始动画
+        draw();
+    </script>
+</body>
+</html>
