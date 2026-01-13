@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什么是声学？</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .back-link {
+            margin-bottom: 20px;
+        }
+        
+        .back-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.3em;
+        }
+        
+        h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.2em;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.4em;
+            color: #34495e;
+        }
+        
+        h4 {
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.3em;
+            color: #34495e;
+        }
+        
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #555;
+            font-style: italic;
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 4px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1em;
+        }
+        
+        li {
+            margin-bottom: 0.5em;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid #ecf0f1;
+            margin: 30px 0;
+        }
+        
+        strong {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        em {
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="../index.html">← 返回首页</a>
+        </div>
+        <h1>什么是声学？</h1>
+<p>——你是干什么的？</p>
+<p>——我是做声学的。</p>
+<p>——啊，生学啊。妇产科的？哦哦，声音的声啊，玩音乐的？卖音响的？</p>
+<p>——不是，我……</p>
+<p>此处省略号代表一个声学从业者的内心独白。</p>
+<p>声学科普做了也已经一年多，值此2020声学之年，觉得很有必要把最基本的东西单拎出来聊聊。今天我们来谈两个问题：</p>
+<p><strong>什么是声学；声学是干什么的。</strong></p>
+<p><img alt="什么是声学？_143_001" src="../images/什么是声学？_143_001.jpg" /></p>
+<p><img alt="什么是声学？_143_002" src="../images/什么是声学？_143_002.jpg" /></p>
+<p><strong>什么是声学？</strong></p>
+<p>声学的英文Acoustics，来源于希腊语ακούειν，意为“听”[1]。维基百科上的定义为：</p>
+<p>声学为物理学分支，涉及机械波在气体、液体和固体中的研究，包含的课题有振动、声音、超声和次声。</p>
+<p>个人觉得这个定义过于严肃，而且略显片面。接下来我们就开始用大白话，穿插着幽默的诙谐，来看看声学到底是个什么玩意。</p>
+<p><img alt="什么是声学？_143_003" src="../images/什么是声学？_143_003.jpg" /></p>
+<p><strong>声学是声音的科学</strong>。也就是说，一切和声音有关的事物，都在声学研究的范围内。从各种东西发出声音，经过不同的东西传播，被能听见声音的器官，比如耳朵，接收并感知到，这一系列过程的每一个环节都和声学相关。</p>
+<p>听觉是动物赖以生存的重要因素，而说话又是人类发展和建立文化的关键。因此，声学科学广泛分布于人类活动和人类社会的各个方面，比如音乐、医疗、建筑、工业、环境甚至战争等。不仅在人世间，兽类之间也通过声学活动来进行他们生命中必不可少的活动，比如求偶、群殴等等。</p>
+<p><img alt="什么是声学？_143_004" src="../images/什么是声学？_143_004.jpg" /></p>
+<p>我们看一下，在我写这篇文章的过程，都涉及到哪些方面的声学：</p>
+<p><strong>打开电脑，打开spotify放歌</strong></p>
+<p>—— 各种乐器手弹奏，歌手演唱，通过录音设备留下声音；声音文件通过spotify软件，被我的音响播放；播放出来的声音一部分直接进到我的耳朵，而另一部分经过我房间的各种反射才能进到耳朵；房间的地板下面铺有吸声材料，沙发和窗帘材料也在扮演吸声好手，这些都会影响我听到的声音；</p>
+<p>—— 涉及到：乐器、音乐、录音（麦克风、前段放大器、数采）、音频工程、音响工程、房间声学、声学吸声材料；</p>
+<p><strong>敲打键盘</strong></p>
+<p>—— 键盘发出的声音也是经过设计，你会发现苹果的键盘和联想的并不一样，和机械键盘又不一样；</p>
+<p>—— 涉及到：机械、声学设计、工业设计；</p>
+<p>写了一会，走到窗边，打开窗户透透气</p>
+<p>—— 窗户打开后，马上就能听到大街上的各种交通工具的声音，街上有各种汽车，每种汽车的引擎声和经过声音都不尽相同；</p>
+<p>—— 涉及到：环境噪声、建筑声学、汽车声学；</p>
+<p><strong>掏出手机，跟朋友发几条语音</strong></p>
+<p>—— 对着话筒说话，用Bose耳机听朋友回复。不想听语音，把语音转文字；</p>
+<p>—— 涉及到：麦克风技术、DSP、主动降噪、声音压缩、语音识别；</p>
+<p>说实话，不写出来我也没发现短短的几个活动就可以涉猎到这么多领域。这就是声学的特点，交叉性极强。</p>
+<p>著名的“声学之轮”了解一下。</p>
+<p><img alt="什么是声学？_143_005" src="../images/什么是声学？_143_005.jpg" /></p>
+<p>很少有基础理论学科能做到声学交叉性这么强 [https://acoustics.byu.edu/content/what-acoustics]</p>
+<p><img alt="什么是声学？_143_002" src="../images/什么是声学？_143_002.jpg" /></p>
+<p><strong>声学是干什么的？</strong></p>
+<p>萨尔福德大学声学网站上有一张图</p>
+<p><img alt="什么是声学？_143_006" src="../images/什么是声学？_143_006.jpg" /></p>
+<p>我原来科普讲座里面也大概整理过涉及到的领域：</p>
+<p><img alt="什么是声学？_143_007" src="../images/什么是声学？_143_007.jpg" /></p>
+<p>美国声学协会ASA（Acoustical Society of America）对声学领域的进行了如下分支：</p>
+<p><strong>气动声学（Aeroacoustics）</strong>：关注声音/噪声如何通过气体流动产生以及传播，比如噪声怎样通过航天器和风车产生，以及吹奏乐器如何发声等等。</p>
+<p>风车旋转过程的湍流仿真</p>
+<p><strong>音频信号处理（Audio signal processing）</strong>：设计范围比较广，比如</p>
+<ul>
+<li>模拟声音信号处理，涉及到电气工程；</li>
+<li>声音增强，比如在混响比较强的空间中；</li>
+<li>去噪，比如Skype的回声消除或者助听器的去噪降噪；</li>
+<li>音频文件压缩，比如大名鼎鼎的MP3；</li>
+<li>声音信号识别，比如摇一摇搜歌。</li>
+</ul>
+<p><strong>建筑声学（Architectural acoustics）</strong>：我之前详细介绍过建筑声学发展史，这里不做过多介绍。</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483684&amp;idx=1&amp;sn=4997c4dc53be76bde0be54a355addde5&amp;chksm=fcb4b3f9cbc33aef5fb89b7b17b2b9e7fe8e007e2ae77856bfe63d8d5b700f5fdd1429072f3c&amp;scene=21#wechat_redirect">声学发展史之——建筑声学 (Architectural Acoustics)</a></p>
+<p><strong>生物声学（Bioacoustics）</strong>：主要研究动物间声音的产生和听觉。包括声音交流和动物行为和种类进化的关系，动物的听力原理和神经生理学，利用声音来监督动物种群，人为噪声对动物的影像等等。我在AI声学这篇文章里面也介绍了人工智能如何应用在生物声学</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484042&amp;idx=1&amp;sn=67d0dce75f11cf1ad32ed0827b4a78ef&amp;chksm=fcb4b057cbc339416b28a7a6e7e9579d16c4fa34c1ec97b36e249bc90eeb85c9d4312c0e0c55&amp;scene=21#wechat_redirect">声学发展史之——人工智能（AI）声学</a></p>
+<p><strong>电声学（Electroacoustics）</strong>：涉及到耳机、麦克风、音响等声音系统的声音重建、录制和设计。电声随着手机等便携式电子设备的兴起而迅猛发展，HiFi爱好者对其也有很大推动。大部分相关的电子企业都有电声方面的研究。</p>
+<p><strong>环境声学（Environmental Acoustics）</strong>：控制环境中交通、飞机、工业设备、娱乐活动等产生的振动和噪声。声学从业者需要能够定量检测噪声，并且提出解决方案。很多声学咨询都可以提供相关服务，国内外在环境声学领域都有很多人在做。由于和人的健康息息相关，环境噪声对人的影响越来越大，也因此更受重视。声景（Soundscape）是环境声学衍生出来的新宠，不止关注与噪声，也关注如何积极地利用声音，为人服务。更多声景的知识可以参考康健老师的书[4]。</p>
+<p><img alt="什么是声学？_143_008" src="../images/什么是声学？_143_008.jpg" /></p>
+<p>https://www.nps.gov/yose/learn/nature/soundscape.htm</p>
+<p><strong>音乐声学（Musical Acoustics）</strong>：致力于研究音乐的物理特性和感知。主要包括乐器和电子合成器的功能和设计，人类的嗓音研究，电脑分析音乐和合成（原来有个同事在芬兰学的computational music），医用的音乐理疗等等。</p>
+<p>Autotune救了多少歌手的车祸现场？</p>
+<p><strong>噪声控制（Noise Control）</strong>：顾名思义，关注怎样降低噪声，可从三个领域降噪：噪声源、传播途径和接受者（比如戴耳塞）。噪声控制里面包含一个重要的工业应用分支：NVH（noise, vibration, and harshness），在汽车领域扮演者极为重要的角色。继N和V之后，H也逐渐被重视起来，这就不得不谈心理声学。</p>
+<p><strong>心理声学（Psychoacoustics）</strong>：声学和心理学的结合，是声学领域的新贵。人脑这个黑箱，给声学带来了无尽不确定性以及挑战。在原来的文章也长篇大论过，不在这里展开。</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483754&amp;idx=1&amp;sn=425a1ef2a31a3fcafd864fa822c4862a&amp;chksm=fcb4b3b7cbc33aa176c82c4d0b5287f6c6e9a815403705e62f05e8fce224c67ef0ac9d08a9cc&amp;scene=21#wechat_redirect">声学发展史之——心理声学(Psychoacoustics) · 上</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483817&amp;idx=1&amp;sn=739f4240113aa013149d930213498f11&amp;chksm=fcb4b374cbc33a62ed29ff6c2e58e52c8555a5b421f7dab1db62dab6ac7b2d443f55b1bbe5e5&amp;scene=21#wechat_redirect">声学发展史之——心理声学(Psychoacoustics) · 下</a></p>
+<p><strong>语音（Speech）</strong>：包括语音的产生、处理和感知，涉及到物理、生理、心理、语音信号处理和语言学。在人工智能/机器学习中，语音识别和语义分析是两大重要课题。如何让语音清晰、高效、高质量的被传递和接受是现在语音交互中的难点。我在上面提到的人工智能声学那篇文章也有提过。</p>
+<p><strong>超声（Ultrasonics）</strong>：虽然频率太高，人类听不见，但是在医疗领域应用广泛，其他领域还包括无损监测、水声等。</p>
+<p><strong>水声（Underwater Acoustics）</strong>：说了半天水上的，终于来了个水下的。经典的水声研究就是水下声源定位，在军事上广泛应用。除了人类活动之外，水声也和生物声学交叉，面向水下动物。</p>
+<p><img alt="什么是声学？_143_009" src="../images/什么是声学？_143_009.jpg" /></p>
+<p>http://www.sercel.com/products/Pages/mats3g.aspx</p>
+<p><strong>振动和动力（Vibration and Dynamics）</strong>：研究机械系统的振动，比如铁轨的地面振动、建筑物的隔振（消声室）、人类振动（手-手臂振动症候群）、桥梁防震、建筑中结构声等等。</p>
+<p>除了ASA提到的这些分类，我个人觉得还有几个分需要以补充（部分和上边提到的有重叠）：</p>
+<p>医疗声学、材料声学、虚拟声学。</p>
+<p>虚拟声学这块我写过关于Auralization的发展史：</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483839&amp;idx=1&amp;sn=132905534721b7f88d882c05e7c6e2a9&amp;chksm=fcb4b362cbc33a7416079be369ce5555a24aad42af0998d87fbfd74585882104e2a5d34a0e39&amp;scene=21#wechat_redirect">声学发展史之——可听化 (Auralization)</a></p>
+<p>最后来看看声学从业者们现身说法：</p>
+<p>https://exploresound.org/meet-acousticians/</p>
+<p>欢迎声学同行们补充、提意见和建议。</p>
+<p>最后希望疫情早日退去，生活尽快恢复正常，小伙伴们健康平安！</p>
+<p>在家没事的时候看看声学科普也不错 ^^</p>
+<p><img alt="什么是声学？_143_002" src="../images/什么是声学？_143_002.jpg" /></p>
+<p>封面来源于：</p>
+<p>https://www.gyptone.com/benefits-acoustics/</p>
+<p><strong>参考</strong></p>
+<p>[1] Turner, J., &amp; Pretlove, A. J. (1991).Acoustics for engineers. Macmillan International Higher Education.</p>
+<p>[2] http://salfordacoustics.co.uk/</p>
+<p>[3] https://exploresound.org/</p>
+<p>[4] Kang, J., &amp; Schulte-Fortkamp, B. (Eds.). (2016).Soundscape and the built environment(pp. 161-195). Boca Raton, FL, USA:: CRC press.</p>
+<p>[5] https://en.wikipedia.org/wiki/Acoustical_engineering#Acoustic_Engineer_.28Professional.29</p>
+<p><strong>往期文章精选：</strong></p>
+<p><strong>科普知识系列：</strong></p>
+<p><strong><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484103&amp;idx=1&amp;sn=617ef28890d2d00c1efe0108d1b96ad9&amp;chksm=fcb4b01acbc3390c5d3cf026d6e29deba6ce4931b8a6a34b7ecc758b1a7a18724c530ef70466&amp;scene=21#wechat_redirect">耳虫（耳朵里的虫子？）：洗脑神曲的那些事儿</a></strong></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484087&amp;idx=1&amp;sn=16351eb18698241cb2fb91f7ee7efdb6&amp;chksm=fcb4b06acbc3397c77550d51ca71789e487e4023f37d340e69266e801faacd3ff1e76fed559d&amp;scene=21#wechat_redirect">录音里，为什么我们的声音这</a><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484087&amp;idx=1&amp;sn=16351eb18698241cb2fb91f7ee7efdb6&amp;chksm=fcb4b06acbc3397c77550d51ca71789e487e4023f37d340e69266e801faacd3ff1e76fed559d&amp;scene=21#wechat_redirect">么奇(nan)怪(ting)？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484061&amp;idx=1&amp;sn=8593d85d252c2da4a3cd40cc2dcbb400&amp;chksm=fcb4b040cbc339569b96d2c839477bc68f33bd2682398f4737984b1562378c1d7e1c3af92bef&amp;scene=21#wechat_redirect">洗澡时唱歌为什么更好听？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484031&amp;idx=1&amp;sn=1e26c9650a4ff6dd2a80b772c6013541&amp;chksm=fcb4b0a2cbc339b40f639005fa85e2ca83a0f64dc07ed9f6ddbe54919d98a637d957018fe61c&amp;scene=21#wechat_redirect">《畅所欲言：从尼安德特人到人工智能的人类会话史》</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483994&amp;idx=1&amp;sn=e067283ceae6886460f6f745e2d3f708&amp;chksm=fcb4b087cbc33991e1c8c990714c0b748efd30090681c03f9b9cb90e2cd2b71da0ee41db5aa7&amp;scene=21#wechat_redirect">罗曼蒂克的私语走廊（whispering gallery）：这不是一篇纽约游记，这是一篇声学科普</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483866&amp;idx=1&amp;sn=1bf0ece5ef365a29919847e85310f301&amp;chksm=fcb4b307cbc33a11f7dcd6da65d71e8920103fdb28980c37cbc6598b87ec662fc81a43e6ceb6&amp;scene=21#wechat_redirect">人是怎么感知声音频率高低的？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483919&amp;idx=1&amp;sn=1f8920ce993709c5e0203d7ff538bf31&amp;chksm=fcb4b0d2cbc339c4eaa3d26d27bbc69f93bb1f490309fcfb60a86659aa03566d4e81dc607a2b&amp;scene=21#wechat_redirect">人听到声音为什么会分辨出前后左右？</a></p>
+<p><strong>声学发展史系列：</strong></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247484042&amp;idx=1&amp;sn=67d0dce75f11cf1ad32ed0827b4a78ef&amp;chksm=fcb4b057cbc339416b28a7a6e7e9579d16c4fa34c1ec97b36e249bc90eeb85c9d4312c0e0c55&amp;scene=21#wechat_redirect">声学发展史之——人工智能（AI）声学</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483839&amp;idx=1&amp;sn=132905534721b7f88d882c05e7c6e2a9&amp;chksm=fcb4b362cbc33a7416079be369ce5555a24aad42af0998d87fbfd74585882104e2a5d34a0e39&amp;scene=21#wechat_redirect">声学发展史之——可听化 (Auralization)</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483754&amp;idx=1&amp;sn=425a1ef2a31a3fcafd864fa822c4862a&amp;chksm=fcb4b3b7cbc33aa176c82c4d0b5287f6c6e9a815403705e62f05e8fce224c67ef0ac9d08a9cc&amp;scene=21#wechat_redirect">声学发展史之——心理声学(Psychoacoustics) · 上</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483817&amp;idx=1&amp;sn=739f4240113aa013149d930213498f11&amp;chksm=fcb4b374cbc33a62ed29ff6c2e58e52c8555a5b421f7dab1db62dab6ac7b2d443f55b1bbe5e5&amp;scene=21#wechat_redirect">声学发展史之——心理声学(Psychoacoustics) · 下</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483720&amp;idx=1&amp;sn=8b9d6c62d7a2531b9a09674d46ec0639&amp;chksm=fcb4b395cbc33a837b11a0acdd5cfc059ab1573328995f8adda7de30c930bdd6bd8b2be04dd3&amp;scene=21#wechat_redirect">声学发展史之——声音可视化 (Sound Visualization) · 上</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483716&amp;idx=1&amp;sn=142185eda3814906fdc4b6e8276e5cc7&amp;chksm=fcb4b399cbc33a8ff4facdd52439a1442c1bed9acf4a97146d5061e852670f1dbab39060f20a&amp;scene=21#wechat_redirect">声学发展史之——声音可视化 (Sound Visualization) · 下</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483684&amp;idx=1&amp;sn=4997c4dc53be76bde0be54a355addde5&amp;chksm=fcb4b3f9cbc33aef5fb89b7b17b2b9e7fe8e007e2ae77856bfe63d8d5b700f5fdd1429072f3c&amp;scene=21#wechat_redirect">声学发展史之——建筑声学 (Architectural Acoustics)</a></p>
+<p><strong>声学专业系列：</strong></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483913&amp;idx=1&amp;sn=ef77257857a40892fa56c0a866bda4bc&amp;chksm=fcb4b0d4cbc339c2017c0ce3f9d7ab34ef7344600f256fb80b907c2f9221c0c375fbebf5804e&amp;scene=21#wechat_redirect">做声学的同行都在用什么书/教材？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU2NTgxNTIxOA==&amp;mid=2247483845&amp;idx=1&amp;sn=076b24aea48a172a47d3e88e5769286e&amp;chksm=fcb4b318cbc33a0e3e6c091d7233183160e7d8d911126dc8440e98638961d1b7f34936330db2&amp;scene=21#wechat_redirect">声学专业的学长们，想学声学，求阻止？</a></p>
+<p><img alt="什么是声学？_143_010" src="../images/什么是声学？_143_010.jpg" /></p>
+<p><strong>扫码关注我们</strong></p>
+<p><strong>转载请联系作者</strong></p>
+<p>知乎专栏/今日头条：</p>
+<p><strong>子鱼说声学</strong></p>
+<p>点“在看”给我一朵小黄花<img alt="什么是声学？_143_011" src="../images/什么是声学？_143_011.jpg" /></p>
+<p><img alt="什么是声学？_143_012" src="../images/什么是声学？_143_012.jpg" /></p>
+<hr />
+<p><strong>作者</strong>: 子鱼FM<br />
+<strong>发布时间</strong>: 2026-01-06 18:16:28<br />
+<strong>原文链接</strong>: https://mp.weixin.qq.com/s/rXofbM3X83wUHI3KCknrTw  </p>
+    </div>
+</body>
+</html>

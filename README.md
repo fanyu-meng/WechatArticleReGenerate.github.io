@@ -1,81 +1,121 @@
-# 声学发展史之——建筑声学
+# 声学科普文章集
 
-这是一个从 Markdown 转换为静态网页的项目，可直接部署到 GitHub Pages。
+这是一个多文章静态网站，使用 GitHub Pages 部署。
 
 ## 项目结构
 
 ```
-.
-├── docs/                    # GitHub Pages 部署目录
-│   ├── index.html          # 主页面
-│   └── images/             # 图片资源目录
-│       └── ...            # 所有文章图片
-├── resources/              # 原始资源文件
-│   └── 声学发展史之——建筑声学_(Architectural_Acoustics)_20260106_184535.md
-└── README.md              # 本文件
+docs/
+├── index.html                    # Landing Page（首页）
+├── .nojekyll                    # GitHub Pages 配置
+├── articles/                     # 文章页面目录
+│   ├── architectural-acoustics.html
+│   └── what-is-acoustics.html
+├── images/                       # 所有图片资源（共享）
+│   └── ...
+├── Gemini- deep Research-声学概念-infographic.html  # 信息图表页面
+└── Reverb.mp4                    # 视频文件
 ```
 
-## GitHub Pages 部署步骤
+## 添加新文章
 
-### 方法 1: 使用 docs 目录（推荐）
+### 方法 1: 使用脚本自动处理（推荐）
 
-1. **推送代码到 GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit: 声学发展史文章"
-   git push origin main
-   ```
+1. **编辑 `process_multiple_articles.py`**，在 `ARTICLES` 列表中添加新文章配置：
 
-2. **配置 GitHub Pages**
-   - 进入仓库的 Settings
-   - 找到 Pages 设置
-   - Source 选择 "Deploy from a branch"
-   - Branch 选择 `main`，文件夹选择 `/docs`
-   - 点击 Save
+```python
+ARTICLES = [
+    # ... 现有文章 ...
+    {
+        "id": "new-article-id",           # 唯一标识符（英文）
+        "title": "新文章标题",             # 显示标题
+        "markdown_file": "path/to/article.md",  # Markdown 文件路径
+        "html_file": "articles/new-article-id.html",  # 输出 HTML 路径
+        "date": "2026-01-13",            # 发布日期
+    },
+]
+```
 
-3. **访问网站**
-   - 几分钟后，网站将在 `https://[你的用户名].github.io/WechatArticleReGenerate.github.io/` 可用
+2. **运行处理脚本**：
 
-### 方法 2: 使用根目录
+```bash
+source venv/bin/activate
+python3 process_multiple_articles.py
+```
 
-如果你想使用根目录部署，可以：
+脚本会自动：
+- 提取文章引用的所有图片
+- 从源目录复制图片到 `docs/images/`
+- 更新图片路径为相对路径
+- 生成 HTML 页面
+- 更新 Landing Page
 
-1. 将 `docs` 目录下的所有文件移动到根目录
-2. 在 Settings > Pages 中选择 "Deploy from a branch"，文件夹选择 `/ (root)`
+### 方法 2: 手动处理
+
+1. 将 Markdown 文件复制到 `resources/` 目录
+2. 手动提取图片并复制到 `docs/images/`
+3. 使用 `markdown_to_html_v2.py` 转换单个文件
+4. 手动更新 `docs/index.html` 添加文章链接
+
+## 部署到 GitHub Pages
+
+1. **提交更改**：
+
+```bash
+git add docs/
+git commit -m "Add: 新文章"
+git push origin main
+```
+
+2. **配置 GitHub Pages**：
+   - 进入仓库 Settings > Pages
+   - Source: Deploy from a branch
+   - Branch: `main`
+   - Folder: `/docs`
+   - 保存设置
+
+3. **访问网站**：
+   - 几分钟后访问：`https://[你的用户名].github.io/WechatArticleReGenerate.github.io/`
 
 ## 本地预览
-
-你可以使用 Python 的简单 HTTP 服务器预览：
 
 ```bash
 cd docs
 python3 -m http.server 8000
+# 访问 http://localhost:8000
 ```
 
-然后在浏览器中访问 `http://localhost:8000`
+## 文章配置说明
 
-## 更新内容
+每篇文章需要以下配置：
 
-如果需要更新文章内容：
+- **id**: 唯一标识符，用于文件名和 URL（建议使用英文和连字符）
+- **title**: 文章标题，显示在 Landing Page 和页面标题中
+- **markdown_file**: Markdown 文件的路径（可以是绝对路径或相对路径）
+- **html_file**: 生成的 HTML 文件路径（相对于 `docs/` 目录）
+- **date**: 发布日期（格式：YYYY-MM-DD）
 
-1. 修改 `resources/` 目录下的 Markdown 文件
-2. 运行处理脚本：
-   ```bash
-   python3 process_images.py      # 复制图片
-   source venv/bin/activate
-   python3 markdown_to_html_v2.py  # 生成 HTML
-   ```
-3. 提交并推送更改
+## 图片处理
 
-## 技术说明
-
-- **Markdown 转换**: 使用 Python `markdown` 库进行转换
-- **图片处理**: 自动从源目录复制被引用的图片
-- **样式**: 内置响应式 CSS，适配移动端和桌面端
-- **静态部署**: 纯静态 HTML/CSS/图片，无需后端服务
+- 所有文章的图片统一存放在 `docs/images/` 目录
+- 图片文件名保持原样（可能包含中文字符）
+- 文章页面使用相对路径 `../images/文件名` 引用图片
+- 脚本会自动去重，相同文件名的图片只复制一次
 
 ## 注意事项
 
-- 确保所有图片路径在 HTML 中都是相对路径
-- 图片文件名包含中文字符，确保 Git 配置正确处理 UTF-8
-- GitHub Pages 支持中文文件名，无需特殊配置
+1. **图片路径**: 确保 Markdown 中的图片路径能被脚本正确识别
+2. **文件编码**: 所有文件使用 UTF-8 编码
+3. **文件名**: 支持中文文件名，GitHub Pages 可以正常处理
+4. **资源文件**: HTML 文件、视频文件等需要手动复制到 `docs/` 目录
+
+## 技术栈
+
+- **Markdown 转换**: Python `markdown` 库
+- **样式**: 纯 CSS，响应式设计
+- **部署**: GitHub Pages（纯静态）
+
+## 更新日志
+
+- 2026-01-13: 初始版本，支持多文章结构
+- 2026-01-13: 添加"什么是声学？"文章
