@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声学分支全景报告：从物理原理到跨学科应用</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f9f9f9;
+            --paper-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #eaeaea;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+       .container {
+            background-color: var(--paper-color);
+            width: 100%;
+            max-width: 900px;
+            padding: 60px 80px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 20px;
+        }
+
+       .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 50px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #34495e;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f6f8;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+       .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            background-color: #fdfdfd;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        blockquote {
+            border-left: 4px solid #bdc3c7;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            color: #555;
+            font-style: italic;
+        }
+
+       .citation {
+            color: var(--accent-color);
+            font-size: 0.8em;
+            vertical-align: super;
+            text-decoration: none;
+        }
+
+       .footer {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #95a5a6;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        /* Print optimization */
+        @media print {
+            body { background-color: white; padding: 0; }
+           .container { box-shadow: none; width: 100%; max-width: 100%; padding: 40px; }
+           .mermaid { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>声学全景报告</h1>
+    <div class="subtitle">从物理原理到跨学科应用的前沿综述</div>
+
+    <h2>1. 引言：声学的定义、范畴与历史演变</h2>
+    <p>声学（Acoustics），作为一门研究机械波在气体、液体和固体中产生、传播、接收及其效应的科学，其内涵早已超越了传统的"声音"概念 [1, 2]。根据美国国家标准协会（ANSI）和美国声学学会（ASA）的定义，声学不仅涵盖了可听声（Audio），还包括了频率低于人类听觉下限的次声（Infrasound）和高于听觉上限的超声（Ultrasound），以及机械振动和冲击等现象 [1, 3]。</p>
+
+    <h3>1.1 林赛声学轮（Lindsay's Wheel of Acoustics）</h3>
+    <p>为了系统地理解这一庞大的学科体系，R. Bruce Lindsay 于1964年在《美国声学学会杂志》（JASA）上提出了著名的"林赛声学轮"（Lindsay's Wheel of Acoustics） [2, 4]。这是一个同心圆结构的分类系统，直观地展示了声学如何从核心的物理原理辐射到四个主要的应用象限：</p>
+    <ul>
+        <li><b>地球科学（Earth Sciences）</b>：包括水下声学、大气声学、地震学等。</li>
+        <li><b>工程学（Engineering）</b>：涵盖电声学、噪声控制、超声工程、结构振动等。</li>
+        <li><b>生命科学（Life Sciences）</b>：涉及生理声学、心理声学、生物声学、医学声学等。</li>
+        <li><b>艺术（The Arts）</b>：包含音乐声学、建筑声学等 [4, 5, 6]。</li>
+    </ul>
+
+    <h2>2. 声学分支全景图谱</h2>
+    <p>下图基于林赛声学轮的分类逻辑，展示了声学各分支的层级与关联。中心是声学的物理基础，向外延伸至四大应用领域。</p>
+    
+    <div class="mermaid">
+    mindmap
+      root((声学 Acoustics))
+        基础物理声学<br/>Physical Acoustics
+          线性声学
+            波动方程
+            声阻抗与反射
+            吸收与衰减
+          非线性声学
+            激波与声爆
+            参量阵
+            医学谐波成像
+          前沿交叉
+            量子声学 (声子)
+            光声效应
+            声学超材料
+        生命科学<br/>Life Sciences
+          生理声学
+            耳蜗力学
+            骨传导机制
+          心理声学
+            掩蔽效应 (MP3原理)
+            双耳定位 (VR音效)
+            音高与响度感知
+          生物/生态声学
+            回声定位 (蝙蝠/鲸)
+            声景生态监测
+          医学声学
+            诊断 (B超/彩超)
+            治疗 (HIFU/碎石)
+        工程技术<br/>Engineering
+          电声学
+            换能器 (麦克风/扬声器)
+            MEMS技术
+          噪声控制
+            被动控制 (吸声/隔声)
+            主动控制 (ANC降噪)
+          结构与振动
+            模态分析
+            声固耦合
+            阻尼减振
+          气动声学
+            喷流噪声
+            计算气动声学 (CAA)
+          信号处理
+            波束形成
+            盲源分离
+        地球与大气<br/>Earth Sciences
+          水下声学
+            声纳探测
+            SOFAR深海声道
+            海洋层析术
+          大气声学
+            次声监测 (核爆/灾害)
+            气象折射效应
+          地声与地震
+            地层勘探
+            地声反演
+        艺术与人文<br/>Arts & Humanities
+          音乐声学
+            乐器发声物理
+            音律系统
+          建筑声学
+            厅堂音质 (混响时间)
+            隔声设计
+          语言声学
+            语音合成 (TTS)
+            语音识别 (ASR)
+          司法与考古
+            声纹鉴定
+            枪声定位
+            古代遗址声学
+    </div>
+
+    <h2>3. 基础物理声学：波动理论与非线性机制</h2>
+    <p>物理声学（Physical Acoustics）是整个声学大厦的基石，它致力于通过数学物理方法揭示声波在各种介质中的传播规律 [1, 7]。</p>
+    
+    <h3>3.1 线性声学与波动方程</h3>
+    <p>在经典的线性声学范畴内，声波被视为微小的压力扰动。其核心假设是介质的密度和压强变化相对于平衡态是微小的，遵循叠加原理（Superposition Principle）。</p>
+    <ul>
+        <li><b>波动方程</b>：描述声压随时间和空间变化的二阶微分方程。</li>
+        <li><b>声阻抗（Acoustic Impedance）</b>：定义为声压与质点速度之比。它是决定声波在界面处反射和透射特性的关键参数。例如，空气与水之间的巨大阻抗失配导致了绝大部分声能被水面反射，这是水下声学与空气声学显著不同的根本原因 [8]。</li>
+        <li><b>吸收与衰减</b>：声波在传播过程中会因粘滞性、热传导和分子弛豫过程而损耗能量。</li>
+    </ul>
+
+    <h3>3.2 非线性声学：从激波到声爆</h3>
+    <p>当声波的幅度足够大时，线性假设不再成立，进入非线性声学（Nonlinear Acoustics）的领域。在此状态下，声速不再是常数，而是取决于瞬时声压和质点速度——波峰处的传播速度快于波谷 [9]。</p>
+    <ul>
+        <li><b>声爆（Sonic Boom）</b>：当飞行器速度超过声速时，其产生的压缩波无法以此速度向前扩散，从而堆积形成锥形的激波面（马赫锥）[10, 11]。</li>
+        <li><b>医学谐波成像</b>：利用组织中产生的非线性高次谐波进行成像，由于谐波波束更窄且旁瓣更低，分辨率显著提高 [10, 12]。</li>
+        <li><b>参量阵（Parametric Array）</b>：利用两个高频强声波的非线性相互作用产生具有极高指向性的低频差频信号 [10]。</li>
+    </ul>
+
+    <h3>3.3 量子声学与光声学</h3>
+    <ul>
+        <li><b>量子声学</b>：研究声子（Phonons）与电子、光子的相互作用，是超导量子计算中的关键环节 [13, 14]。</li>
+        <li><b>光声效应</b>：当物质吸收调制的光能时，由于热膨胀产生声波。光声成像结合了光学的对比度和声学的穿透深度，在生物医学成像中展现巨大潜力 [15, 16]。</li>
+    </ul>
+
+    <h2>4. 生命科学中的声学：听觉、心理与医疗</h2>
+    
+    <h3>4.1 生理声学与心理声学</h3>
+    <ul>
+        <li><b>生理声学</b>：研究听觉系统的解剖结构与生物力学机制，如听小骨的阻抗匹配和耳蜗的频率选择性 [17, 18]。</li>
+        <li><b>心理声学</b>：探讨物理声信号与主观听觉感知（音高、响度、音色）的映射关系。<b>掩蔽效应</b>（Masking Effect）是MP3等压缩算法的核心原理 [19, 20]。</li>
+    </ul>
+
+    <h3>4.2 医学声学</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>类别</th>
+                <th>技术</th>
+                <th>原理与应用</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="3">诊断超声</td>
+                <td>B超 (B-Mode)</td>
+                <td>利用回波强度调制屏幕亮度，形成二维断层图像。</td>
+            </tr>
+            <tr>
+                <td>多普勒超声</td>
+                <td>利用多普勒效应测量血流速度和方向 [8, 21]。</td>
+            </tr>
+            <tr>
+                <td>弹性成像</td>
+                <td>测量组织硬度，用于鉴别恶性肿瘤。</td>
+            </tr>
+            <tr>
+                <td rowspan="2">治疗超声</td>
+                <td>HIFU</td>
+                <td>高强度聚焦超声，产生高温消融肿瘤或破坏结石 [22]。</td>
+            </tr>
+            <tr>
+                <td>声孔效应</td>
+                <td>利用超声增加细胞膜通透性，促进药物递送 [22]。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>5. 工程声学：控制、转换与分析</h2>
+    
+    <h3>5.1 电声学与噪声控制</h3>
+    <ul>
+        <li><b>换能器</b>：传声器（麦克风）和扬声器是电声学的核心。MEMS技术使其微型化，广泛应用于智能设备 [23]。</li>
+        <li><b>噪声控制</b>：分为<b>被动控制</b>（吸声材料、隔声墙）和<b>主动控制</b>（ANC，产生反相声波相消）[24, 25]。</li>
+    </ul>
+
+    <h3>5.2 气动声学 (Aeroacoustics)</h3>
+    <p>研究流体流动产生的声音，如喷气式发动机的喷流噪声和飞机降落时的机体噪声。计算气动声学（CAA）利用高精度数值格式求解微弱的声波信号 [26, 27]。</p>
+
+    <h2>6. 地球与大气科学中的声学</h2>
+    
+    <h3>6.1 水下声学 (Underwater Acoustics)</h3>
+    <p>由于电磁波在水中衰减极快，声波是水下探测的唯一有效手段。<b>SOFAR声道</b>（深海声道）允许声波以极低损耗传播数千公里，是海洋监测的关键 [28, 29]。</p>
+
+    <h3>6.2 大气声学与次声</h3>
+    <p><b>次声</b>（Infrasound，&lt;20Hz）在大气中衰减极小，可被用于监测核爆炸、火山爆发和龙卷风等灾害事件 [30, 31]。</p>
+
+    <h2>7. 艺术与人文中的声学</h2>
+    <ul>
+        <li><b>音乐声学</b>：剖析乐器的发声物理机制和音律系统 [17]。</li>
+        <li><b>建筑声学</b>：致力于创造良好的听音环境。<b>混响时间</b>（RT60）是衡量厅堂音质的核心指标 [32]。</li>
+        <li><b>司法声学</b>：利用声纹鉴定身份，或通过枪声录音进行三角定位 [33]。</li>
+        <li><b>考古声学</b>：研究古代建筑（如巨石阵、壁画洞穴）的声学特性，探究其在仪式中的作用 [34]。</li>
+    </ul>
+
+    <h2>8. 前沿技术</h2>
+    <ul>
+        <li><b>声学超材料</b>：具有负折射率等奇异特性，可实现"声学隐身斗篷" [35, 36]。</li>
+        <li><b>热声技术</b>：利用声波与热能的转换，开发无运动部件的绿色制冷机 [37]。</li>
+        <li><b>机器学习</b>：用于复杂的声源定位、故障预测和生物声学分类 [38, 39]。</li>
+    </ul>
+
+    <div class="footer">
+        Generated by AI Research Assistant | Based on Lindsay's Wheel of Acoustics & Modern Research
+    </div>
+</div>
+
+</body>
+</html>
