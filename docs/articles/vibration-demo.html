@@ -163,6 +163,39 @@
             background: #2980b9;
         }
         
+        .play-btn {
+            padding: 12px 30px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto;
+        }
+        
+        .play-btn:hover {
+            background: #229954;
+            transform: scale(1.05);
+        }
+        
+        .play-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .play-btn.playing {
+            background: #e74c3c;
+        }
+        
+        .play-btn.playing:hover {
+            background: #c0392b;
+        }
+        
         .back-link {
             margin-bottom: 20px;
         }
@@ -215,6 +248,11 @@
             <button class="preset-btn" onclick="setPreset(880, 50)">A5 (高八度)</button>
         </div>
         
+        <button id="playBtn" class="play-btn" onclick="toggleSound()">
+            <span id="playIcon">▶</span>
+            <span id="playText">播放声音</span>
+        </button>
+        
         <div class="canvas-container">
             <canvas id="vibrationCanvas"></canvas>
         </div>
@@ -222,9 +260,10 @@
         <div class="info-panel">
             <h3>📚 什么是振动和频率？</h3>
             <p><strong>振动</strong>：物体围绕平衡位置做周期性往复运动。就像你看到的弦，它在平衡位置（水平线）上下摆动。</p>
-            <p><strong>频率</strong>：单位时间内完成振动的次数，单位是赫兹（Hz）。频率越高，振动越快，声音越高。</p>
-            <p><strong>振幅</strong>：振动的最大位移。振幅越大，振动的幅度越大，声音越响。</p>
-            <p><strong>弦振动</strong>：当弦被拨动时，会产生驻波（standing wave），形成特定的振动模式。不同的频率对应不同的音高。</p>
+            <p><strong>频率</strong>：单位时间内完成振动的次数，单位是赫兹（Hz）。频率越高，振动越快，声音越高。点击"播放声音"按钮，你可以听到对应频率的声音！</p>
+            <p><strong>振幅</strong>：振动的最大位移。振幅越大，振动的幅度越大，声音越响。调整振幅滑块时，如果正在播放声音，你会听到音量变化。</p>
+            <p><strong>弦振动</strong>：当弦被拨动时，会产生驻波（standing wave），形成特定的振动模式。不同的频率对应不同的音高。440 Hz 是标准音 A4，也是管弦乐队调音的标准。</p>
+            <p><strong>💡 提示</strong>：调整频率滑块时，如果正在播放声音，音高会实时变化。试试从低频率（100 Hz）慢慢调到高频率（1000 Hz），感受音高的变化！</p>
         </div>
     </div>
     
@@ -245,6 +284,98 @@
         let amplitude = 50; // 百分比
         let time = 0;
         
+        // Web Audio API
+        let audioContext = null;
+        let oscillator = null;
+        let gainNode = null;
+        let isPlaying = false;
+        
+        // 初始化音频上下文（需要用户交互后）
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                gainNode = audioContext.createGain();
+                gainNode.connect(audioContext.destination);
+            }
+        }
+        
+        // 播放/停止声音
+        function toggleSound() {
+            if (!isPlaying) {
+                startSound();
+            } else {
+                stopSound();
+            }
+        }
+        
+        function startSound() {
+            initAudio();
+            
+            // 如果音频上下文被暂停（浏览器策略），恢复它
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            // 创建振荡器
+            oscillator = audioContext.createOscillator();
+            oscillator.type = 'sine'; // 正弦波，类似弦振动
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            
+            // 设置音量（根据振幅）
+            const volume = amplitude / 100 * 0.3; // 最大音量30%，避免太响
+            gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+            
+            // 连接并播放
+            oscillator.connect(gainNode);
+            oscillator.start();
+            
+            isPlaying = true;
+            updatePlayButton();
+        }
+        
+        function stopSound() {
+            if (oscillator) {
+                oscillator.stop();
+                oscillator.disconnect();
+                oscillator = null;
+            }
+            isPlaying = false;
+            updatePlayButton();
+        }
+        
+        function updatePlayButton() {
+            const btn = document.getElementById('playBtn');
+            const icon = document.getElementById('playIcon');
+            const text = document.getElementById('playText');
+            
+            if (isPlaying) {
+                btn.classList.add('playing');
+                icon.textContent = '⏸';
+                text.textContent = '停止声音';
+            } else {
+                btn.classList.remove('playing');
+                icon.textContent = '▶';
+                text.textContent = '播放声音';
+            }
+        }
+        
+        // 更新频率时同步音频
+        function updateFrequency(newFreq) {
+            frequency = newFreq;
+            if (oscillator && isPlaying) {
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            }
+        }
+        
+        // 更新振幅时同步音频
+        function updateAmplitude(newAmp) {
+            amplitude = newAmp;
+            if (gainNode && isPlaying) {
+                const volume = amplitude / 100 * 0.3;
+                gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+            }
+        }
+        
         // 获取控制元素
         const freqSlider = document.getElementById('frequency');
         const ampSlider = document.getElementById('amplitude');
@@ -255,22 +386,24 @@
         
         // 更新频率
         freqSlider.addEventListener('input', (e) => {
-            frequency = parseFloat(e.target.value);
-            freqValue.textContent = frequency + ' Hz';
-            freqLabel.textContent = frequency;
+            const newFreq = parseFloat(e.target.value);
+            updateFrequency(newFreq);
+            freqValue.textContent = newFreq + ' Hz';
+            freqLabel.textContent = newFreq;
         });
         
         // 更新振幅
         ampSlider.addEventListener('input', (e) => {
-            amplitude = parseFloat(e.target.value);
-            ampValue.textContent = amplitude + '%';
-            ampLabel.textContent = amplitude;
+            const newAmp = parseFloat(e.target.value);
+            updateAmplitude(newAmp);
+            ampValue.textContent = newAmp + '%';
+            ampLabel.textContent = newAmp;
         });
         
         // 预设按钮
         function setPreset(freq, amp) {
-            frequency = freq;
-            amplitude = amp;
+            updateFrequency(freq);
+            updateAmplitude(amp);
             freqSlider.value = freq;
             ampSlider.value = amp;
             freqValue.textContent = freq + ' Hz';
