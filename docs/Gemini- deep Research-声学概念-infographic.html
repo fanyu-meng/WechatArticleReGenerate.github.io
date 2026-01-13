@@ -1,0 +1,514 @@
+<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建筑声学：测量看不见的声音</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 引入适合中文显示的字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+        
+        /* 图表容器样式 - 严格控制 */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* 大屏限制宽度 */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* 基础高度 */
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* 公式样式 */
+        .formula-box {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            background: #f1f5f9;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+            overflow-x: auto;
+            font-size: 1.1rem;
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+    <!-- 
+    配色方案: "Electric Indigo & Hot Pink"
+    主色: #4f46e5 (Indigo 600)
+    次色: #db2777 (Pink 600)
+    第三色: #8b5cf6 (Violet 500)
+    强调色: #f59e0b (Amber 500)
+    -->
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Hero 头部区域 -->
+    <header class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 text-white py-20 px-4 shadow-xl">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">声音的建筑学</h1>
+            <p class="text-xl md:text-2xl font-light text-indigo-100 max-w-3xl mx-auto">
+                将物理空间转化为乐器的秘密。
+                <br>
+                从<strong>清晰度</strong>到<strong>空间感</strong>，解读听觉感知的数学原理。
+            </p>
+        </div>
+    </header>
+
+    <!-- 主要内容容器 -->
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- 简介网格 -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition-shadow">
+                <div class="text-4xl mb-4">👂</div>
+                <h3 class="text-xl font-bold mb-2">主观感知</h3>
+                <p class="text-slate-600">人耳和大脑如何通过声音的反射来判断空间的大小、距离和包围感。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-pink-500 hover:shadow-xl transition-shadow">
+                <div class="text-4xl mb-4">📐</div>
+                <h3 class="text-xl font-bold mb-2">几何形态</h3>
+                <p class="text-slate-600">房间的形状、体积和表面材料如何决定声波的物理行为。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-xl transition-shadow">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-bold mb-2">客观测量</h3>
+                <p class="text-slate-600">声学家使用 ISO 3382 标准参数来量化什么是“好听”的声音。</p>
+            </div>
+        </section>
+
+        <!-- 第1部分: 清晰度 (C80) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-4 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 p-2 rounded-lg mr-3 text-2xl">01</span> 
+                    清晰度 (C<sub>80</sub> & C<sub>50</sub>)
+                </h2>
+                <p class="mb-4 text-lg leading-relaxed">
+                    <strong>清晰度指数</strong> 衡量的是“早期声能”（直达声+早期反射）与“晚期混响声能”的比率。
+                </p>
+                <p class="mb-4 text-slate-600">
+                    它决定了声音是清晰分明（干）还是浑然一体（湿）。数值越高越清晰，数值越低越浑厚。
+                    <ul class="list-disc ml-6 mt-2 space-y-1 text-slate-600">
+                        <li><strong>C<sub>50</sub> (语言):</strong> 以50毫秒为界。理想值 > 0 dB（确保语言可懂度）。</li>
+                        <li><strong>C<sub>80</sub> (音乐):</strong> 以80毫秒为界。交响乐理想值为 -2 到 +2 dB。</li>
+                    </ul>
+                </p>
+                
+                <div class="formula-box text-lg">
+                    C<sub>80</sub> = 10 log<sub>10</sub> ( <span class="text-indigo-600">∫<sub>0</sub><sup>80ms</sup> p<sup>2</sup>(t)dt</span> / <span class="text-pink-600">∫<sub>80ms</sub><sup>∞</sup> p<sup>2</sup>(t)dt</span> ) dB
+                </div>
+                <p class="text-sm text-slate-500 mt-2">其中 <em>p(t)</em> 为声压脉冲响应。</p>
+            </div>
+            <div class="order-1 md:order-2 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-center mb-4">能量分布：演讲 vs 交响乐</h3>
+                <div class="chart-container">
+                    <canvas id="chartClarity"></canvas>
+                </div>
+                <p class="text-xs text-center text-slate-400 mt-2">不同用途对早期与晚期能量比例的需求对比。</p>
+            </div>
+        </section>
+
+        <hr class="border-slate-200">
+
+        <!-- 第2部分: 早期衰变时间 (EDT) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-center mb-4">声音衰变曲线</h3>
+                <div class="chart-container">
+                    <canvas id="chartDecay"></canvas>
+                </div>
+                <p class="text-xs text-center text-slate-400 mt-2">EDT 关注最初的 10dB 衰减，这与人耳感知的“混响感”最为相关。</p>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold text-pink-600 mb-4 flex items-center">
+                    <span class="bg-pink-100 text-pink-600 p-2 rounded-lg mr-3 text-2xl">02</span> 
+                    早期衰变时间 (EDT)
+                </h2>
+                <p class="mb-4 text-lg leading-relaxed">
+                    标准的混响时间 (T<sub>60</sub>) 测量声音衰减 60dB 所需的时间，而 <strong>EDT (Early Decay Time)</strong> 则是根据最初 10dB 的衰减推算出来的。
+                </p>
+                <p class="mb-4 text-slate-600">
+                    在音乐演奏时，EDT 更能代表观众<strong>主观感受</strong>到的混响。一个大厅可能 T<sub>60</sub> 很长，但如果早期反射声很强（EDT 短），听起来依然会很清晰。
+                </p>
+                
+                <div class="formula-box text-lg">
+                    EDT = 衰减 10dB 所需时间 × 6
+                </div>
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mt-4">
+                    <p class="text-sm text-indigo-800">
+                        <strong>洞察：</strong> 如果 EDT 显著小于 T<sub>60</sub>，说明该大厅有很强的定向早期反射声，能在混响丰富的空间中保持清晰度。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-slate-200">
+
+        <!-- 第3部分: 空间感 (LEF & ASW) -->
+        <section>
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-4">空间印象：LEF & ASW</h2>
+                <p class="text-lg text-slate-600">
+                    沉浸感来自于侧面到达的声音。这种“包围感”让听众感觉自己置身于音乐<strong>之中</strong>，而非仅仅是在观看。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- LEF 卡片 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+                    <div class="bg-indigo-600 p-4 text-white">
+                        <h3 class="text-xl font-bold">侧向能量因子 (LEF)</h3>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <p class="mb-4 text-slate-600">衡量从侧面（Lateral）到达的早期能量占总早期能量的比例。</p>
+                        <div class="formula-box text-base mb-4">
+                            LEF = ∫<sub>5ms</sub><sup>80ms</sup> p<sub>L</sub><sup>2</sup>(t)dt / ∫<sub>0</sub><sup>80ms</sup> p<sup>2</sup>(t)dt
+                        </div>
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li class="flex items-start"><span class="text-indigo-500 mr-2">➤</span> <strong>p<sub>L</sub>(t):</strong> 侧向声压（8字形麦克风拾取）。</li>
+                            <li class="flex items-start"><span class="text-indigo-500 mr-2">➤</span> <strong>高 LEF (>0.25):</strong> 带来极佳的包围感和空间感。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ASW 卡片 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+                    <div class="bg-pink-600 p-4 text-white">
+                        <h3 class="text-xl font-bold">视在声源宽度 (ASW)</h3>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <p class="mb-4 text-slate-600">这是一个主观指标，描述声源听起来有多“宽”。它与 LEF 和 IACC 密切相关。</p>
+                        <div class="flex items-center justify-center space-x-4 my-6">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-slate-200 rounded-full mx-auto mb-2 flex items-center justify-center text-xl">🎻</div>
+                                <span class="text-xs">ASW 窄 (单点)</span>
+                            </div>
+                            <div class="text-2xl text-slate-400">vs</div>
+                            <div class="text-center">
+                                <div class="w-24 h-12 bg-slate-200 rounded-full mx-auto mb-2 flex items-center justify-center text-xl tracking-widest">🎻 🎻 🎻</div>
+                                <span class="text-xs">ASW 宽 (宏大)</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-600">丰富的侧向反射会让独奏小提琴的声音听起来更加宏大、丰满。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第4部分: IACC & G -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <!-- IACC 解释 -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-amber-500 h-full">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">双耳互相关系数 (IACC)</h3>
+                    <p class="text-sm text-slate-600 mb-4"><strong>IACC</strong> 测量到达左耳和右耳的声波的相似程度。</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-amber-500 font-bold mr-2">1.0</span>
+                            <span>单声道 (双耳信号完全相同)。声音听起来像是在“头脑内部”。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-500 font-bold mr-2">0.0</span>
+                            <span>双耳信号完全不同。空间感和宽阔感达到最大化。</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-slate-100 rounded text-xs italic">
+                        "对于音乐厅来说，我们追求较低的 IACC 值以创造沉浸感。"
+                    </div>
+                </div>
+            </div>
+
+            <!-- 强度 G 解释 -->
+            <div class="md:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">强度 / 响度 (Strength G)</h3>
+                        <p class="text-sm text-slate-500">相对于 10米处自由声场的响度增益。</p>
+                    </div>
+                    <div class="mt-2 md:mt-0 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+                        目标: > 0 dB
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                            <strong>G 值</strong> 定义了大厅“支持”声音的效率。高 G 值的大厅就像一个天然的放大器，让乐器无需扩音也能充满整个空间。
+                        </p>
+                        <div class="formula-box text-sm">
+                            G = 10 log<sub>10</sub> ( ∫<sub>0</sub><sup>∞</sup> p<sup>2</sup>(t)dt / ∫<sub>0</sub><sup>∞</sup> p<sub>10m</sub><sup>2</sup>(t)dt ) dB
+                        </div>
+                    </div>
+                    <!-- Chart for G -->
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="chartG"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 总结雷达图 -->
+        <section class="bg-indigo-900 text-white rounded-2xl p-8 shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4 text-white">寻找“理想”的音乐厅</h2>
+                    <p class="text-indigo-200 mb-6">
+                        声学大师 Leo Beranek 通过研究世界顶级音乐厅（如维也纳金色大厅、波士顿交响乐大厅）定义了完美的平衡。这是一场关于清晰度与丰满度之间的博弈。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 rounded-full bg-pink-500 mr-3"></div>
+                            <span class="font-bold">世界级音乐厅</span>
+                            <span class="ml-auto text-sm opacity-70">高响度 (G), 低 IACC, 适中的 C80</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 rounded-full bg-slate-500 mr-3"></div>
+                            <span class="font-bold">普通阶梯教室 / 干房</span>
+                            <span class="ml-auto text-sm opacity-70">极高清晰度, 低响度, 高 IACC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container bg-indigo-800/50 rounded-xl p-4">
+                    <canvas id="chartRadar"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-12 text-center text-sm">
+        <p class="mb-2">数据可视化基于国际标准建筑声学参数 (ISO 3382)。</p>
+        <p>&copy; 2023 建筑声学信息图表 (Architectural Acoustics Infographic).</p>
+    </footer>
+
+    <script>
+        // --- 工具函数: 标签手动处理 ---
+        // 虽然中文不需要按空格分词，但为了 Chart.js 的美观，
+        // 我们在数据源中直接使用数组来强制换行，或者这里简单处理。
+        // 下面的函数主要用于兼容性，实际数据中我会直接传入数组。
+
+        const commonTooltip = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(''); // 中文连接不需要空格，直接拼接
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const globalDefaults = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { font: { family: 'Noto Sans SC', size: 12 } }
+                },
+                tooltip: commonTooltip
+            }
+        };
+
+        // --- 图表 1: 清晰度 (C80) 堆叠条形图 ---
+        const ctxClarity = document.getElementById('chartClarity').getContext('2d');
+        new Chart(ctxClarity, {
+            type: 'bar',
+            data: {
+                // 使用数组强制换行
+                labels: [['交响乐', '(需要混响烘托)'], ['清晰演讲', '(需要高可懂度)']], 
+                datasets: [
+                    {
+                        label: '早期能量 (0-80ms)',
+                        data: [45, 85], // 音乐早期能量较低，演讲较高
+                        backgroundColor: '#4f46e5', // Indigo
+                        borderRadius: 4
+                    },
+                    {
+                        label: '晚期能量 (>80ms)',
+                        data: [55, 15], // 音乐需要更多晚期能量
+                        backgroundColor: '#cbd5e1', // Slate 300
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                ...globalDefaults,
+                indexAxis: 'y',
+                scales: {
+                    x: { 
+                        stacked: true, 
+                        max: 100, 
+                        title: { display: true, text: '声能百分比 (%)', font: {family: 'Noto Sans SC'} } 
+                    },
+                    y: { 
+                        stacked: true,
+                        ticks: { font: {family: 'Noto Sans SC'} }
+                    }
+                }
+            }
+        });
+
+        // --- 图表 2: EDT 衰变曲线 ---
+        const timePoints = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0];
+        const linearDecay = [0, -3, -6, -9, -12, -15, -30]; 
+        const steepEarlyDecay = [0, -8, -14, -18, -21, -23, -32]; 
+
+        const ctxDecay = document.getElementById('chartDecay').getContext('2d');
+        new Chart(ctxDecay, {
+            type: 'line',
+            data: {
+                labels: timePoints.map(t => t + '秒'),
+                datasets: [
+                    {
+                        label: '标准衰变 (T60 = EDT)',
+                        data: linearDecay,
+                        borderColor: '#94a3b8', // Slate
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        pointRadius: 0
+                    },
+                    {
+                        label: '高清晰度衰变 (短 EDT)',
+                        data: steepEarlyDecay,
+                        borderColor: '#db2777', // Pink
+                        borderWidth: 3,
+                        pointBackgroundColor: '#db2777',
+                        pointRadius: 3
+                    }
+                ]
+            },
+            options: {
+                ...globalDefaults,
+                scales: {
+                    y: {
+                        title: { display: true, text: '声压级 (dB)', font: {family: 'Noto Sans SC'} },
+                        reverse: false, 
+                        suggestedMin: -35,
+                        suggestedMax: 0
+                    },
+                    x: {
+                        title: { display: true, text: '时间 (秒)', font: {family: 'Noto Sans SC'} }
+                    }
+                },
+                plugins: {
+                    ...globalDefaults.plugins,
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: -10,
+                                yMax: -10,
+                                borderColor: 'rgba(0,0,0,0.2)',
+                                borderWidth: 1,
+                                label: { content: '-10dB 阈值', enabled: true }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 图表 3: 强度 (G) 对比 ---
+        const ctxG = document.getElementById('chartG').getContext('2d');
+        new Chart(ctxG, {
+            type: 'bar',
+            data: {
+                labels: [['鞋盒式大厅', '(高 G值)'], ['扇形大厅', '(低 G值)'], ['露天环境', '(参考基准)']],
+                datasets: [{
+                    label: '强度 (G) dB',
+                    data: [5, 1, 0],
+                    backgroundColor: ['#4f46e5', '#8b5cf6', '#cbd5e1'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                ...globalDefaults,
+                indexAxis: 'y', 
+                scales: {
+                    x: {
+                        title: { display: true, text: '相对于自由声场的响度 (dB)', font: {family: 'Noto Sans SC'} }
+                    }
+                }
+            }
+        });
+
+        // --- 图表 4: 雷达综述 ---
+        const ctxRadar = document.getElementById('chartRadar').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['响度 (G)', '混响感 (EDT)', '清晰度 (C80)', '包围感 (LEF)', '温暖感 (Bass)'],
+                datasets: [
+                    {
+                        label: '顶级音乐厅',
+                        data: [8, 8, 5, 9, 8], // 均衡，高包围感
+                        backgroundColor: 'rgba(236, 72, 153, 0.4)', // Pink transparent
+                        borderColor: '#ec4899',
+                        pointBackgroundColor: '#ec4899',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '干燥讲堂',
+                        data: [4, 2, 9, 2, 3], // 高清晰度，低混响/温暖感
+                        backgroundColor: 'rgba(148, 163, 184, 0.4)', // Slate transparent
+                        borderColor: '#94a3b8',
+                        pointBackgroundColor: '#94a3b8',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                ...globalDefaults,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255,255,255,0.2)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        pointLabels: {
+                            color: 'white',
+                            font: { size: 12, family: 'Noto Sans SC' }
+                        },
+                        ticks: { display: false, maxTicksLimit: 5 }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: 'white', font: {family: 'Noto Sans SC'} } },
+                    tooltip: commonTooltip
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
